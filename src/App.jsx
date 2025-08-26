@@ -19,8 +19,8 @@ export default function App() {
   const [isAdmin, setIsAdmin] = useState(true);
   const location = useLocation();
 
-  // Check if current path is dashboard
-  const isDashboard = location.pathname === "/admin-digi-123";
+  // Check if current path is admin dashboard
+  const isDashboard = location.pathname === "/admin-digitner";
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -45,13 +45,12 @@ export default function App() {
           <Route path="/blog/:id" element={<BlogDetail />} />
 
           <Route
-            path="/admin-digi-123"
+            path="/admin-digitner"
             element={isAdmin ? <Dashboard /> : <Navigate to="/" replace />}
           />
         </Routes>
       </main>
 
-      {/* Render Footer only if NOT on dashboard */}
       {!isDashboard && <Footer />}
     </div>
   );

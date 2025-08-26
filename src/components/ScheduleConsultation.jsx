@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { BaseUrl } from "../config";
 
 const ScheduleConsultation = () => {
   const [loading, setLoading] = useState(false);
@@ -7,7 +8,6 @@ const ScheduleConsultation = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
     setToast(null);
 
@@ -27,8 +27,10 @@ const ScheduleConsultation = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      console.log("res: ", res);
 
       const result = await res.json();
+      console.log("result: ", result);
 
       if (res.ok) {
         setToast({ type: "success", message: result.message });
