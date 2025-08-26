@@ -143,7 +143,7 @@ const Footer = () => {
           </motion.div>
         </motion.div>
 
-        <FloatingBtn />
+        {/* <FloatingBtn /> */}
 
         {/* Bottom bar */}
         <motion.div

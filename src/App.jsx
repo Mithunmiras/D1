@@ -13,6 +13,7 @@ import Dashboard from "./components/Dashboard"; // your admin page
 import LogoCarousel from "./components/LogoCarousel";
 import ChatBot from "./components/ChatBot";
 import BlogDetail from "./components/BlogDetail";
+import FloatingBtn from "./components/FloatingBtn";
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState(true);
@@ -30,9 +31,9 @@ export default function App() {
             path="/"
             element={
               <>
+                <FloatingBtn />
                 <Hero />
                 <LogoCarousel />
-
                 <Features />
                 <AboutSection />
                 <BlogSection />

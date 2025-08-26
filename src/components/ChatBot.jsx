@@ -47,7 +47,8 @@ export default function ChatBot({ onClose }) {
 
   return (
     <div
-      className={`fixed bottom-24 right-20 bg-white shadow-lg w-80 h-96 flex flex-col rounded-lg
+      className={`fixed bottom-4 right-4 sm:bottom-8 sm:right-12 bg-white shadow-lg 
+        w-[95%] max-w-sm h-[70vh] sm:w-80 sm:h-96 flex flex-col rounded-lg
         transition-all duration-300 ease-in-out
         ${
           isClosing || isAnimating
@@ -58,7 +59,7 @@ export default function ChatBot({ onClose }) {
     >
       {/* Header */}
       <div className="bg-[#2563EB] text-white p-3 flex justify-between items-center rounded-t-lg">
-        <span>AI Chat</span>
+        <span className="font-semibold">AI Chat</span>
         <button onClick={onClose}>
           <AiOutlineClose size={20} />
         </button>
@@ -69,7 +70,7 @@ export default function ChatBot({ onClose }) {
         {messages.map((msg, idx) => (
           <div
             key={idx}
-            className={`p-2 rounded-lg max-w-[80%] ${
+            className={`p-2 rounded-lg max-w-[80%] break-words ${
               msg.sender === "user"
                 ? "bg-[#2563EB] text-white self-end ml-auto"
                 : "bg-gray-300 text-black self-start"
