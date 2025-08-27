@@ -28,8 +28,8 @@ export const whyChoose = {
 };
 
 export const stats = [
-  { number: 500, suffix: "+", label: "Projects Completed" },
-  { number: 250, suffix: "+", label: "Happy Clients" },
-  { number: 98, suffix: "%", label: "Client Satisfaction" },
+  { number: 75, suffix: "+", label: "Projects Completed" },
+  { number: 65, suffix: "+", label: "Happy Clients" },
+  { number: 95, suffix: "%", label: "Client Satisfaction" },
   { number: 24, suffix: "/7", label: "Support Available" },
 ];

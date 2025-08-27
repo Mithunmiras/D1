@@ -34,7 +34,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Footer grid */}
         <motion.div
-          className="grid md:grid-cols-4 gap-8"
+          className="grid md:grid-cols-4 gap-10"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -45,7 +45,9 @@ const Footer = () => {
             <div className="text-2xl font-bold mb-4">
               <img src={logo} alt="Logo" className="w-40 h-15 mr-2" />
             </div>
-            <p className="text-gray-400 mb-4">Your Digital Solutions Partner</p>
+            <p className="text-gray-400 mb-4">
+              Your Partner for Digital Growth
+            </p>
             <div className="flex space-x-4">
               {["facebook-f", "twitter", "linkedin-in", "instagram"].map(
                 (icon, idx) => (
@@ -65,12 +67,20 @@ const Footer = () => {
           {/* Services */}
           <motion.div variants={itemVariants}>
             <h4 className="font-semibold mb-4">Services</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="columns-2 space-y-2 text-gray-400">
               {[
                 "Digital Strategy",
-                "Web Development",
+                "Business Consulting",
+                "Website Development",
+                "Ecommerce Solutions",
                 "Mobile Development",
-                "Digital Marketing",
+                "CRM Development",
+                "Digital Marketing & Logo Creation",
+                "Lead Generation",
+                "Thought Leadership",
+                "Brand Messaging",
+                "Content Storytelling",
+                "Brochure & Catalogue Design",
               ].map((service, idx) => (
                 <li key={idx}>
                   <motion.a
@@ -128,15 +138,6 @@ const Footer = () => {
                   className="hover:text-white transition duration-300"
                 >
                   info@digitner.com
-                </a>
-              </li>
-              <li>
-                <i className="fab fa-whatsapp mr-2"></i>
-                <a
-                  href="https://wa.me/7540082155"
-                  className="hover:text-white transition duration-300"
-                >
-                  WhatsApp
                 </a>
               </li>
             </ul>
