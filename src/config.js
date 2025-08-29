@@ -1,1 +1,1 @@
-export const BaseUrl = "http://digitner.com";
+export const BaseUrl = "https://digitner.com";
