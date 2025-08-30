@@ -3,34 +3,33 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import logo1 from "../assets/logo1.webp";
-import logo2 from "../assets/logo2.webp";
-import logo3 from "../assets/logo3.webp";
-import logo4 from "../assets/logo4.webp";
-import logo5 from "../assets/logo5.webp";
-import logo6 from "../assets/logo6.webp";
-import logo7 from "../assets/logo7.webp";
-import logo8 from "../assets/logo8.jpeg";
-import logo9 from "../assets/logo9.webp";
-import logo10 from "../assets/logo10.png";
-import logo12 from "../assets/logo12.webp";
-import logo13 from "../assets/logo13.webp";
-import logo14 from "../assets/logo14.webp";
-import logo15 from "../assets/logo15.webp";
-import logo17 from "../assets/logo17.webp";
-import logo18 from "../assets/logo18.webp";
-import logo19 from "../assets/logo19.webp";
-import logo20 from "../assets/logo20.webp";
-import logo21 from "../assets/logo21.webp";
-import logo22 from "../assets/logo22.webp";
-import logo23 from "../assets/logo23.webp";
-import logo24 from "../assets/logo24.webp";
-import logo25 from "../assets/logo25.webp";
-import logo26 from "../assets/logo26.webp";
-import logo27 from "../assets/logo27.webp";
-import logo28 from "../assets/logo28.webp";
-import logo29 from "../assets/logo29.png";
-import logo31 from "../assets/logo31.jpeg";
+import logo1 from "../assets/logo-1.png";
+import logo2 from "../assets/logo-2.png";
+import logo3 from "../assets/logo-3.png";
+import logo4 from "../assets/logo-4.png";
+import logo5 from "../assets/logo-5.png";
+import logo6 from "../assets/logo-6.png";
+import logo7 from "../assets/logo-7.png";
+import logo8 from "../assets/logo-8.png";
+import logo9 from "../assets/logo-9.png";
+import logo10 from "../assets/logo-10.png";
+import logo12 from "../assets/logo-12.png";
+import logo13 from "../assets/logo-13.png";
+import logo14 from "../assets/logo-14.png";
+import logo15 from "../assets/logo-15.png";
+import logo16 from "../assets/logo-16.png";
+import logo17 from "../assets/logo-17.png";
+import logo18 from "../assets/logo-18.png";
+import logo19 from "../assets/logo-19.png";
+import logo20 from "../assets/logo-20.png";
+import logo21 from "../assets/logo-21.png";
+import logo22 from "../assets/logo-22.png";
+import logo23 from "../assets/logo-23.png";
+import logo24 from "../assets/logo-24.png";
+import logo25 from "../assets/logo-25.png";
+import logo26 from "../assets/logo-26.png";
+import logo27 from "../assets/logo-27.png";
+// import logo28 from "../assets/logo-28.png";
 
 // ✅ Use the imported images, not static string paths
 const logos = [
@@ -48,6 +47,7 @@ const logos = [
   logo13,
   logo14,
   logo15,
+  logo16,
   logo17,
   logo18,
   logo19,
@@ -59,9 +59,6 @@ const logos = [
   logo25,
   logo26,
   logo27,
-  logo28,
-  logo29,
-  logo31,
 ];
 
 export default function LogoCarousel() {
@@ -90,7 +87,7 @@ export default function LogoCarousel() {
           <img
             src={logo}
             alt={`Logo ${index + 1}`}
-            className="h-16 object-contain"
+            className="h-[5rem] object-contain"
             loading="lazy"
             draggable={false}
             onError={(e) => {
