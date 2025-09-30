@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { navLinks, title, title1, titleDesc } from "../data/navLinks"; // adjust the path as needed
-import logo from "../assets/logo.png";
+import logo from "/logo.png";
 const Navbar = () => {
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50 ">

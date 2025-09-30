@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import ChatBot from "./ChatBot";
 import FloatingBtn from "./FloatingBtn";
-import logo from "../assets/mainLogo2.png";
+import logo from "/mainLogo2.png";
 
 const Footer = () => {
   const phoneNumber = "+91 7540082155";
