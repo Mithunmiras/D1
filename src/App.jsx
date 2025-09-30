@@ -5,7 +5,11 @@ import Layout from "./layouts/Index";
 import PublicIndex from "./Pages/Public/Index";
 import PrivateRoutingIndex from "./Pages/PrivateRouting/Index";
 import BlogDetail from "./Component/BlogDetail";
-import ChatBot from "./Component/ChatBot";
+import ServicesPage from "./Pages/ServicesPage";
+import AboutPage from "./Pages/AboutPage";
+import BlogPage from "./Pages/BlogPage";
+import ContactPage from "./Pages/ContactPage";
+import PageTransition from "./utils/PageTransition";
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState(true);
@@ -15,14 +19,20 @@ export default function App() {
 
   return (
     <Layout>
-      <Routes>
-        <Route path="/" element={<PublicIndex />} />
-        <Route path="/blog/:id" element={<BlogDetail />} />
-        <Route
-          path="/admin-digitner"
-          element={isAdmin ? <PrivateRoutingIndex /> : <Navigate to="/" replace />}
-        />
-      </Routes>
+      <PageTransition pathname={location.pathname}>
+        <Routes>
+          <Route path="/" element={<PublicIndex />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
+          <Route
+            path="/admin-digitner"
+            element={isAdmin ? <PrivateRoutingIndex /> : <Navigate to="/" replace />}
+          />
+        </Routes>
+      </PageTransition>
     </Layout>
   );
 }

@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* small helpers */
+@layer base {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
 .container-max {
   max-width: 1100px;
   margin-left: auto;
@@ -10,12 +15,6 @@
   padding-left: 1rem;
   padding-right: 1rem;
 }
-
-/* .ant-float-btn-body {
-  width: 72px !important;
-  height: 71px !important;
-  padding: 100 !important;
-} */
 
 .floating_icon_buttons .ant-float-btn-group-trigger .ant-float-btn-body {
   background: linear-gradient(to right, #5b6bfa, #6a4df5, #7e38f6) !important;
@@ -25,13 +24,6 @@
   color: white !important;
 }
 
-/* .floating_icon_buttons
-  .ant-float-btn-group
-  .ant-float-btn:first-child
-  .ant-float-btn-body {
-  background: linear-gradient(to right, #5b6bfa, #6a4df5, #7e38f6) !important;
-  color: white !important;
-} */
 .floating_icon_buttons .ant-float-btn-circle {
   width: 65px !important;
   height: 65px !important;
