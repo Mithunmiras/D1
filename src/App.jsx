@@ -1,37 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-
 import Layout from "./layouts/Index";
-import PublicIndex from "./Pages/Public/Index";
-import PrivateRoutingIndex from "./Pages/PrivateRouting/Index";
-import BlogDetail from "./Component/BlogDetail";
-import ServicesPage from "./Pages/ServicesPage";
-import AboutPage from "./Pages/AboutPage";
-import BlogPage from "./Pages/BlogPage";
-import ContactPage from "./Pages/ContactPage";
 import PageTransition from "./utils/PageTransition";
+import LogoLoader from "./Component/LogoLoader";
+
+// Lazy load components
+const PublicRoutes = lazy(() => import("./Pages/Public/Index"));
+const PrivateRoutes = lazy(() => import("./Pages/PrivateRouting/Index"));
+const BlogDetail = lazy(() => import("./Component/BlogDetail"));
+const PageNotFound = lazy(() => import("./Pages/PageNotFound/Index"));
+
+// Loading component
+const LoadingFallback = () => <LogoLoader />;
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState(true);
   const location = useLocation();
 
-  const isDashboard = location.pathname === "/admin-digitner";
-
   return (
     <Layout>
       <PageTransition pathname={location.pathname}>
-        <Routes>
-          <Route path="/" element={<PublicIndex />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/blog/:id" element={<BlogDetail />} />
-          <Route
-            path="/admin-digitner"
-            element={isAdmin ? <PrivateRoutingIndex /> : <Navigate to="/" replace />}
-          />
-        </Routes>
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/*" element={<PublicRoutes />} />
+
+            {/* Blog Detail Route */}
+            <Route path="/blog/:id" element={<BlogDetail />} />
+
+            {/* Admin Routes */}
+            <Route
+              path="/admin-digitner/*"
+              element={isAdmin ? <PrivateRoutes /> : <Navigate to="/" replace />}
+            />
+
+            {/* 404 Route */}
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </Suspense>
       </PageTransition>
     </Layout>
   );

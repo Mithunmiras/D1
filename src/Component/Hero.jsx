@@ -2,7 +2,7 @@ import React from "react";
 import { FaPhone } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-export default function HomeSection() {
+export default function Hero() {
   return (
     <section
       id="home"

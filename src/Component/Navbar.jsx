@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { navLinks, titleDesc } from "../data/navLinks";
+import { navLinks, title, title1, titleDesc } from "../config/navigation";
 import logo from "/logo.png";
 
 const Navbar = () => {

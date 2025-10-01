@@ -8,4 +8,4 @@ export const navLinks = [
 
 export const title = "Digital";
 export const title1 = "ner";
-export const titleDesc = "Your Partner for Digital Growth";
+export const titleDesc = "Your Partner for Digital Growth";

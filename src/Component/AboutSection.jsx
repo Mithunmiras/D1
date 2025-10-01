@@ -5,7 +5,7 @@ import {
   vision,
   whyChoose,
   stats,
-} from "../data/aboutData";
+} from "../config/aboutData";
 import { FaCheckCircle } from "react-icons/fa";
 import CountUp from "react-countup";
 import { motion } from "framer-motion";
@@ -64,7 +64,7 @@ export default function AboutSection() {
               {whyChoose.title}
             </h3>
             <ul className="space-y-4">
-              {whyChoose.reasons.map((reason, idx) => (
+              {whyChoose.items && whyChoose.items.map((item, idx) => (
                 <motion.li
                   key={idx}
                   className="flex items-center"
@@ -74,7 +74,7 @@ export default function AboutSection() {
                   viewport={{ once: true }}
                 >
                   <FaCheckCircle className="text-green-500 mr-3" />
-                  <span>{reason}</span>
+                  <span>{item}</span>
                 </motion.li>
               ))}
             </ul>
@@ -98,15 +98,15 @@ export default function AboutSection() {
                 viewport={{ once: true }}
               >
                 <CountUp
-                  end={s.number}
+                  end={parseInt(String(s.value).replace(/[^0-9]/g, ""), 10) || 0}
                   duration={3}
-                  separator=","
+                  separator="," 
                   enableScrollSpy
                   scrollSpyOnce
                   smartEasingThreshold={1000}
                   smartEasingAmount={500}
                 />
-                {s.suffix}
+                {s.value.replace(/[0-9]/g, "")}
               </motion.div>
               <div className="text-gray-600">{s.label}</div>
             </motion.div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { tabs, content, titleDesc, title } from "../data/servicesData";
+import { tabs, content, titleDesc, title } from "../config/servicesData";
 
 export default function ServicesSection() {
   const [activeTab, setActiveTab] = useState("digital-strategy");
@@ -95,23 +95,14 @@ export default function ServicesSection() {
                 </h3>
                 <div className="grid md:grid-cols-2 gap-8">
                   {/* What We Do */}
-                  <div>
-                    <h4 className="font-semibold mb-3">What We Do</h4>
-                    <ul className="space-y-2 text-gray-600">
-                      {content[activeTab].whatWeDo.map((item, idx) => (
-                        <li key={idx}>• {item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  {/* Value Propositions */}
-                  <div>
-                    <h4 className="font-semibold mb-3">Value Propositions</h4>
-                    <ul className="space-y-2 text-gray-600">
-                      {content[activeTab].valueProps.map((item, idx) => (
-                        <li key={idx}>• {item}</li>
-                      ))}
-                    </ul>
-                  </div>
+                    <div className="md:col-span-2">
+                      <h4 className="font-semibold mb-3">Features</h4>
+                      <ul className="space-y-2 text-gray-600">
+                        {content[activeTab].features.map((item, idx) => (
+                          <li key={idx}>• {item}</li>
+                        ))}
+                      </ul>
+                    </div>
                 </div>
               </motion.div>
             ) : (

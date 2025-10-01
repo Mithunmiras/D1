@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { blogSection } from "../data/blogData";
+import { blogSection } from "../config/blogData";
 import { BaseUrl } from "../config";
 import { motion } from "framer-motion";
 
