@@ -8,7 +8,7 @@ const About = lazy(() => import("./about"));
 const Contact = lazy(() => import("./contact"));
 const Services = lazy(() => import("./services"));
 const Blog = lazy(() => import("./blog"));
-const PageNotFound = lazy(() => import("../PageNotFound"));
+const PageNotFound = lazy(() => import("../PageNotFound/index"));
 
 // Loading component
 const LoadingFallback = () => <LogoLoader />;

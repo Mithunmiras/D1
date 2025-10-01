@@ -8,7 +8,7 @@ import LogoLoader from "./Component/LogoLoader";
 const PublicRoutes = lazy(() => import("./Pages/Public/Index"));
 const PrivateRoutes = lazy(() => import("./Pages/PrivateRouting/Index"));
 const BlogDetail = lazy(() => import("./Component/BlogDetail"));
-const PageNotFound = lazy(() => import("./Pages/PageNotFound/Index"));
+const PageNotFound = lazy(() => import("./Pages/PageNotFound/index"));
 
 // Loading component
 const LoadingFallback = () => <LogoLoader />;
