@@ -164,15 +164,5 @@ export const servicesDropdownMenu = [
     id: 'growth-marketing',
     label: 'Growth Marketing & Automation',
     path: '/services/growth-marketing'
-  },
-  {
-    id: 'web-development',
-    label: 'Web Development',
-    path: '/services/web-development'
-  },
-  {
-    id: 'mobile-apps',
-    label: 'Mobile App Development',
-    path: '/services/mobile-apps'
   }
 ];

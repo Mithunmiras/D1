@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaHome, FaChevronRight } from 'react-icons/fa';
-import CountUp from 'react-countup';
 
 const ServicesHero = ({ data }) => {
   const scrollToProcess = () => {
@@ -67,11 +66,7 @@ const ServicesHero = ({ data }) => {
                 className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-6 text-center border border-white border-opacity-20"
               >
                 <div className="text-3xl md:text-4xl font-bold mb-2">
-                  <CountUp
-                    end={parseInt(stat.number)}
-                    duration={2.5}
-                    suffix={stat.number.replace(/[0-9]/g, '')}
-                  />
+                  {stat.number}
                 </div>
                 <div className="text-sm text-blue-100">{stat.label}</div>
               </motion.div>
