@@ -2,12 +2,17 @@ import React from "react";
 import { motion } from "framer-motion";
 import { pageTransitionVariant } from "./motionVariants";
 import HeroSection from "./HeroSection";
-import FeaturesSection from "./FeaturesSection";
 import BrandsSection from "./BrandsSection";
-import AboutSection from "./AboutSection";
-import BlogSection from "./BlogSection";
-import ContactSection from "./ContactSection";
-import CallToAction from "./CallToAction";
+import AboutUsSection from "./AboutUsSection";
+import ServicesSection from "./ServicesSection";
+import ImpactStatistics from "./ImpactStatistics";
+import ClientTestimonials from "./ClientTestimonials";
+import PartnersSection from "./PartnersSection";
+import OurProcess from "./OurProcess";
+import LatestInsights from "./LatestInsights";
+import VisionMission from "./VisionMission";
+import MeetTheTeam from "./MeetTheTeam";
+import ContactFormSection from "./ContactFormSection";
 import FloatingBtn from "../../../../Component/FloatingBtn";
 
 const LandingPageComponent = () => {
@@ -22,11 +27,16 @@ const LandingPageComponent = () => {
       <FloatingBtn />
       <HeroSection />
       <BrandsSection />
-      <FeaturesSection />
-      <AboutSection />
-      <BlogSection />
-      <CallToAction />
-      <ContactSection />
+      <AboutUsSection />
+      <ServicesSection />
+      <ImpactStatistics />
+      <ClientTestimonials />
+      <PartnersSection />
+      <OurProcess />
+      <LatestInsights />
+      <VisionMission />
+      <MeetTheTeam />
+      <ContactFormSection />
     </motion.div>
   );
 };
