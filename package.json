@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.58.0",
     "antd": "^5.27.1",
     "framer-motion": "^12.23.12",
     "netlify-cli": "^23.2.1",
