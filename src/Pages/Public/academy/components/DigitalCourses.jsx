@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../../../lib/supabase';
 import CourseCard from './CourseCard';
 import CourseDetails from './CourseDetails';
 
@@ -14,14 +13,46 @@ const DigitalCourses = () => {
 
   const fetchCourses = async () => {
     try {
-      const { data, error } = await supabase
-        .from('courses')
-        .select('*')
-        .eq('status', 'active')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setCourses(data || []);
+      // Mock data for courses
+      const mockCourses = [
+        {
+          id: 1,
+          title: 'React Fundamentals',
+          description: 'Learn the basics of React development',
+          duration: '4 weeks',
+          level: 'Beginner',
+          price: 99,
+          image_url: '/placeholder.txt',
+          instructor: 'John Doe',
+          status: 'active'
+        },
+        {
+          id: 2,
+          title: 'Advanced JavaScript',
+          description: 'Master advanced JavaScript concepts',
+          duration: '6 weeks',
+          level: 'Advanced',
+          price: 149,
+          image_url: '/placeholder.txt',
+          instructor: 'Jane Smith',
+          status: 'active'
+        },
+        {
+          id: 3,
+          title: 'Node.js Backend Development',
+          description: 'Build scalable backend applications',
+          duration: '8 weeks',
+          level: 'Intermediate',
+          price: 199,
+          image_url: '/placeholder.txt',
+          instructor: 'Mike Johnson',
+          status: 'active'
+        }
+      ];
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setCourses(mockCourses);
     } catch (error) {
       console.error('Error fetching courses:', error);
     } finally {

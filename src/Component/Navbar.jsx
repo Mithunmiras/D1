@@ -71,6 +71,7 @@ const Navbar = () => {
                   about: "/about",
                   blog: "/blog",
                   contact: "/contact",
+                  academy: "/academy",
                 };
                 return (
                   <Link
@@ -140,6 +141,7 @@ const Navbar = () => {
                     about: "/about",
                     blog: "/blog",
                     contact: "/contact",
+                    academy: "/academy",
                   };
                   return (
                     <Link

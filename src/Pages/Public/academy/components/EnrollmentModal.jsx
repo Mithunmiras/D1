@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { supabase } from '../../../../lib/supabase';
 import { FiX } from 'react-icons/fi';
 
 const EnrollmentModal = ({ course, onClose }) => {
@@ -17,22 +16,16 @@ const EnrollmentModal = ({ course, onClose }) => {
     setError('');
 
     try {
-      const { error: enrollError } = await supabase
-        .from('course_enrollments')
-        .insert({
-          course_id: course.id,
-          user_name: formData.name,
-          user_email: formData.email
-        });
-
-      if (enrollError) throw enrollError;
-
-      const { error: updateError } = await supabase
-        .from('courses')
-        .update({ enrolled_count: course.enrolled_count + 1 })
-        .eq('id', course.id);
-
-      if (updateError) throw updateError;
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Mock successful enrollment
+      console.log('Mock enrollment created:', {
+        course_id: course.id,
+        user_name: formData.name,
+        user_email: formData.email,
+        enrolled_at: new Date().toISOString()
+      });
 
       setSuccess(true);
       setTimeout(() => {

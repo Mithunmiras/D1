@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../../../lib/supabase';
 import { FiArrowLeft, FiMessageSquare, FiEye } from 'react-icons/fi';
 
 const DiscussionThread = ({ post, onBack }) => {
@@ -20,14 +19,29 @@ const DiscussionThread = ({ post, onBack }) => {
 
   const fetchReplies = async () => {
     try {
-      const { data, error } = await supabase
-        .from('discussion_replies')
-        .select('*')
-        .eq('post_id', post.id)
-        .order('created_at', { ascending: true });
-
-      if (error) throw error;
-      setReplies(data || []);
+      // Mock replies data
+      const mockReplies = [
+        {
+          id: 1,
+          post_id: post.id,
+          user_name: 'David Wilson',
+          user_email: 'david@example.com',
+          content: 'Great question! I\'ve been working with hooks for a while now and I\'d recommend starting with useState and useEffect...',
+          created_at: '2024-01-15T14:20:00Z'
+        },
+        {
+          id: 2,
+          post_id: post.id,
+          user_name: 'Sarah Chen',
+          user_email: 'sarah@example.com',
+          content: 'I agree with David. Also, make sure to check out the official React documentation on hooks - it\'s really comprehensive.',
+          created_at: '2024-01-15T16:45:00Z'
+        }
+      ];
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setReplies(post.id === 1 ? mockReplies : []); // Only show replies for the first post
     } catch (error) {
       console.error('Error fetching replies:', error);
     } finally {
@@ -37,10 +51,8 @@ const DiscussionThread = ({ post, onBack }) => {
 
   const incrementViewCount = async () => {
     try {
-      await supabase
-        .from('discussion_posts')
-        .update({ view_count: post.view_count + 1 })
-        .eq('id', post.id);
+      // Mock view count increment
+      console.log(`View count incremented for post ${post.id}`);
     } catch (error) {
       console.error('Error updating view count:', error);
     }
@@ -52,24 +64,30 @@ const DiscussionThread = ({ post, onBack }) => {
     setError('');
 
     try {
-      const { error: replyError } = await supabase
-        .from('discussion_replies')
-        .insert({
-          post_id: post.id,
-          user_name: replyForm.name,
-          user_email: replyForm.email,
-          content: replyForm.content
-        });
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Mock successful reply creation
+      console.log('Mock reply created:', {
+        post_id: post.id,
+        user_name: replyForm.name,
+        user_email: replyForm.email,
+        content: replyForm.content,
+        created_at: new Date().toISOString()
+      });
 
-      if (replyError) throw replyError;
-
-      await supabase
-        .from('discussion_posts')
-        .update({ reply_count: post.reply_count + 1 })
-        .eq('id', post.id);
-
+      // Add the new reply to the current replies
+      const newReply = {
+        id: Date.now(),
+        post_id: post.id,
+        user_name: replyForm.name,
+        user_email: replyForm.email,
+        content: replyForm.content,
+        created_at: new Date().toISOString()
+      };
+      
+      setReplies(prev => [...prev, newReply]);
       setReplyForm({ name: '', email: '', content: '' });
-      fetchReplies();
     } catch (err) {
       setError('Failed to post reply. Please try again.');
       console.error('Reply error:', err);

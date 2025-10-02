@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../../../lib/supabase';
 import { FiMessageSquare, FiEye, FiPlus } from 'react-icons/fi';
 import CreatePostModal from './CreatePostModal';
 import DiscussionThread from './DiscussionThread';
@@ -18,22 +17,54 @@ const CommunityDiscussions = () => {
 
   const fetchData = async () => {
     try {
-      const [categoriesData, postsData] = await Promise.all([
-        supabase
-          .from('discussion_categories')
-          .select('*')
-          .order('name'),
-        supabase
-          .from('discussion_posts')
-          .select('*, discussion_categories(name)')
-          .order('created_at', { ascending: false })
-      ]);
+      // Mock data for categories and posts
+      const mockCategories = [
+        { id: 1, name: 'General Discussion', post_count: 5 },
+        { id: 2, name: 'React Help', post_count: 8 },
+        { id: 3, name: 'JavaScript Tips', post_count: 12 },
+        { id: 4, name: 'Career Advice', post_count: 3 }
+      ];
 
-      if (categoriesData.error) throw categoriesData.error;
-      if (postsData.error) throw postsData.error;
-
-      setCategories(categoriesData.data || []);
-      setPosts(postsData.data || []);
+      const mockPosts = [
+        {
+          id: 1,
+          title: 'Getting started with React Hooks',
+          content: 'I\'m new to React and wondering about the best practices for using hooks...',
+          user_name: 'Alice Johnson',
+          user_email: 'alice@example.com',
+          created_at: '2024-01-15T10:30:00Z',
+          reply_count: 5,
+          view_count: 23,
+          discussion_categories: { name: 'React Help' }
+        },
+        {
+          id: 2,
+          title: 'JavaScript ES6 Features You Should Know',
+          content: 'Let\'s discuss the most important ES6 features that every developer should master...',
+          user_name: 'Bob Smith',
+          user_email: 'bob@example.com',
+          created_at: '2024-01-14T15:45:00Z',
+          reply_count: 12,
+          view_count: 45,
+          discussion_categories: { name: 'JavaScript Tips' }
+        },
+        {
+          id: 3,
+          title: 'How to transition from junior to senior developer?',
+          content: 'I\'ve been working as a junior developer for 2 years now. What steps should I take...',
+          user_name: 'Carol Davis',
+          user_email: 'carol@example.com',
+          created_at: '2024-01-13T09:20:00Z',
+          reply_count: 8,
+          view_count: 67,
+          discussion_categories: { name: 'Career Advice' }
+        }
+      ];
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 800));
+      setCategories(mockCategories);
+      setPosts(mockPosts);
     } catch (error) {
       console.error('Error fetching discussions:', error);
     } finally {

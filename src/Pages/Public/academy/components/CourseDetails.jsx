@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../../../lib/supabase';
 import { FiClock, FiVideo, FiFileText, FiUsers, FiArrowLeft, FiDownload, FiEye, FiCheck } from 'react-icons/fi';
 import EnrollmentModal from './EnrollmentModal';
 
@@ -16,30 +15,83 @@ const CourseDetails = ({ course, onBack }) => {
 
   const fetchCourseDetails = async () => {
     try {
-      const [learningData, modulesData, resourcesData] = await Promise.all([
-        supabase
-          .from('course_learning_points')
-          .select('*')
-          .eq('course_id', course.id)
-          .order('order_index'),
-        supabase
-          .from('course_modules')
-          .select('*')
-          .eq('course_id', course.id)
-          .order('order_index'),
-        supabase
-          .from('course_resources')
-          .select('*')
-          .eq('course_id', course.id)
-      ]);
+      // Mock course details data
+      const mockLearningPoints = [
+        { id: 1, course_id: course.id, point: 'Master the fundamentals of modern web development', order_index: 1 },
+        { id: 2, course_id: course.id, point: 'Build responsive and interactive user interfaces', order_index: 2 },
+        { id: 3, course_id: course.id, point: 'Understand component-based architecture', order_index: 3 },
+        { id: 4, course_id: course.id, point: 'Learn state management and data flow', order_index: 4 },
+        { id: 5, course_id: course.id, point: 'Deploy applications to production', order_index: 5 },
+        { id: 6, course_id: course.id, point: 'Best practices and code optimization', order_index: 6 }
+      ];
 
-      if (learningData.error) throw learningData.error;
-      if (modulesData.error) throw modulesData.error;
-      if (resourcesData.error) throw resourcesData.error;
+      const mockModules = [
+        {
+          id: 1,
+          course_id: course.id,
+          title: 'Introduction and Setup',
+          description: 'Get started with the development environment and project structure',
+          order_index: 1
+        },
+        {
+          id: 2,
+          course_id: course.id,
+          title: 'Core Concepts',
+          description: 'Learn the fundamental concepts and building blocks',
+          order_index: 2
+        },
+        {
+          id: 3,
+          course_id: course.id,
+          title: 'Advanced Techniques',
+          description: 'Dive deeper into advanced patterns and optimization techniques',
+          order_index: 3
+        },
+        {
+          id: 4,
+          course_id: course.id,
+          title: 'Project Development',
+          description: 'Build a complete project from start to finish',
+          order_index: 4
+        },
+        {
+          id: 5,
+          course_id: course.id,
+          title: 'Deployment and Production',
+          description: 'Learn how to deploy and maintain your applications',
+          order_index: 5
+        }
+      ];
 
-      setLearningPoints(learningData.data || []);
-      setModules(modulesData.data || []);
-      setResources(resourcesData.data || []);
+      const mockResources = [
+        {
+          id: 1,
+          course_id: course.id,
+          title: 'Course Slides (PDF)',
+          resource_type: 'download',
+          file_url: '/placeholder.txt'
+        },
+        {
+          id: 2,
+          course_id: course.id,
+          title: 'Code Examples',
+          resource_type: 'download',
+          file_url: '/placeholder.txt'
+        },
+        {
+          id: 3,
+          course_id: course.id,
+          title: 'Additional Reading',
+          resource_type: 'view',
+          file_url: '/placeholder.txt'
+        }
+      ];
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 600));
+      setLearningPoints(mockLearningPoints);
+      setModules(mockModules);
+      setResources(mockResources);
     } catch (error) {
       console.error('Error fetching course details:', error);
     } finally {

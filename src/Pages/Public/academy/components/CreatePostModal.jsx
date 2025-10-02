@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { supabase } from '../../../../lib/supabase';
 import { FiX } from 'react-icons/fi';
 
 const CreatePostModal = ({ categories, onClose, onPostCreated }) => {
@@ -19,28 +18,20 @@ const CreatePostModal = ({ categories, onClose, onPostCreated }) => {
     setError('');
 
     try {
-      const { error: postError } = await supabase
-        .from('discussion_posts')
-        .insert({
-          category_id: formData.category || null,
-          user_name: formData.name,
-          user_email: formData.email,
-          title: formData.title,
-          content: formData.content
-        });
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Mock successful post creation
+      console.log('Mock post created:', {
+        category_id: formData.category || null,
+        user_name: formData.name,
+        user_email: formData.email,
+        title: formData.title,
+        content: formData.content,
+        created_at: new Date().toISOString()
+      });
 
-      if (postError) throw postError;
-
-      if (formData.category) {
-        const category = categories.find(c => c.id === formData.category);
-        if (category) {
-          await supabase
-            .from('discussion_categories')
-            .update({ post_count: category.post_count + 1 })
-            .eq('id', formData.category);
-        }
-      }
-
+      // Simulate success
       onPostCreated();
     } catch (err) {
       setError('Failed to create post. Please try again.');
