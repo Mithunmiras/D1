@@ -1,14 +1,13 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
-import LogoLoader from "../../Component/LogoLoader";
 
 const Dashboard = lazy(() => import("../../Component/Dashboard"));
 
-const LoadingFallback = () => <LogoLoader />;
+const LoadingFallback = () => <div>Loading...</div>;
 
 const PrivateRoutes = () => {
   return (
-    <Suspense fallback={<LoadingFallback />}>
+    <Suspense fallback={null}>
       <Routes>
         <Route path="/" element={<Dashboard />} />
       </Routes>

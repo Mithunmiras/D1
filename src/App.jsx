@@ -2,7 +2,6 @@ import React, { useState, Suspense, lazy } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Layout from "./layouts/Index";
 import PageTransition from "./utils/PageTransition";
-import LogoLoader from "./Component/LogoLoader";
 
 // Lazy load components
 const PublicRoutes = lazy(() => import("./Pages/Public/Index"));
@@ -11,7 +10,7 @@ const BlogDetail = lazy(() => import("./Component/BlogDetail"));
 const PageNotFound = lazy(() => import("./Pages/PageNotFound/index"));
 
 // Loading component
-const LoadingFallback = () => <LogoLoader />;
+const LoadingFallback = () => <div>Loading...</div>;
 
 export default function App() {
   const [isAdmin, setIsAdmin] = useState(true);
@@ -20,7 +19,7 @@ export default function App() {
   return (
     <Layout>
       <PageTransition pathname={location.pathname}>
-        <Suspense fallback={<LoadingFallback />}>
+        <Suspense fallback={null}>
           <Routes>
             {/* Public Routes */}
             <Route path="/*" element={<PublicRoutes />} />

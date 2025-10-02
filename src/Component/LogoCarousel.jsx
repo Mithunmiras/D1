@@ -86,21 +86,25 @@ export default function LogoCarousel() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-gray-100 to-white py-6">
+    <div className="bg-gradient-to-r from-gray-50 to-white py-6">
       <Slider {...settings}>
         {logos.map((logo, index) => (
           <div key={index} className="px-2">
-            <img
-              src={logo.src}
-              alt={`Logo ${index + 1}`}
-              className="h-[5rem] object-contain cursor-pointer transition-transform duration-300 hover:scale-110"
-              loading="lazy"
-              draggable={false}
+            <div 
+              className="cursor-pointer group"
               onClick={() => handleLogoClick(logo.name)}
-              onError={(e) => {
-                e.currentTarget.style.visibility = "hidden";
-              }}
-            />
+            >
+              <img
+                src={logo.src}
+                alt={`Logo ${index + 1}`}
+                className="h-16 w-full object-contain transition-transform duration-300 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
+                loading="lazy"
+                draggable={false}
+                onError={(e) => {
+                  e.currentTarget.style.visibility = "hidden";
+                }}
+              />
+            </div>
           </div>
         ))}
       </Slider>

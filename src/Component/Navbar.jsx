@@ -35,27 +35,23 @@ const Navbar = () => {
                 return (
                   <div
                     key={id}
-                    className="relative"
-                    onMouseEnter={() => setIsServicesDropdownOpen(true)}
-                    onMouseLeave={() => setIsServicesDropdownOpen(false)}
+                    className="relative group"
                   >
                     <button className="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300 flex items-center">
                       {label}
                       <FaChevronDown className="ml-1 text-xs" />
                     </button>
-                    {isServicesDropdownOpen && (
-                      <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-xl rounded-lg overflow-hidden border border-gray-100">
-                        {servicesDropdownMenu.map((item) => (
-                          <Link
-                            key={item.id}
-                            to={item.path}
-                            className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 hover:text-white transition duration-300"
-                          >
-                            {item.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-xl rounded-lg overflow-hidden border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                      {servicesDropdownMenu.map((item) => (
+                        <Link
+                          key={item.id}
+                          to={item.path}
+                          className="block px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 hover:text-white transition duration-300"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 );
               }

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import LogoLoader from "../Component/LogoLoader";
+import React from "react";
+import { motion } from "framer-motion";
 
 // Default page transition animation
 export const pageTransition = {
@@ -34,33 +33,10 @@ export const scaleTransition = {
   transition: { duration: 0.3 }
 };
 
-export default function PageTransition({ children, pathname }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [prevPathname, setPrevPathname] = useState(pathname);
-
-  useEffect(() => {
-    if (pathname !== prevPathname) {
-      setIsLoading(true);
-      setPrevPathname(pathname);
-
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 1200);
-
-      return () => clearTimeout(timer);
-    }
-  }, [pathname, prevPathname]);
-
+export default function PageTransition({ children }) {
   return (
-    <>
-      <AnimatePresence mode="wait">
-        {isLoading && <LogoLoader key="loader" />}
-      </AnimatePresence>
-      {!isLoading && (
-        <motion.div {...pageTransition}>
-          {children}
-        </motion.div>
-      )}
-    </>
+    <motion.div {...pageTransition}>
+      {children}
+    </motion.div>
   );
 }

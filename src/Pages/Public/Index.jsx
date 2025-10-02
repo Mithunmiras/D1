@@ -1,6 +1,5 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
-import LogoLoader from "../../Component/LogoLoader";
 
 // Lazy load components
 const LandingPage = lazy(() => import("./LandingPage"));
@@ -11,11 +10,11 @@ const Blog = lazy(() => import("./blog"));
 const PageNotFound = lazy(() => import("../PageNotFound/index"));
 
 // Loading component
-const LoadingFallback = () => <LogoLoader />;
+const LoadingFallback = () => <div>Loading...</div>;
 
 const PublicRoutes = () => {
   return (
-    <Suspense fallback={<LoadingFallback />}>
+    <Suspense fallback={null}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="about" element={<About />} />
