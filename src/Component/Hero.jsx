@@ -57,24 +57,25 @@ export default function Hero() {
   const SecondaryIcon = slide.secondaryButton.icon;
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.section
-        key={currentSlide}
-        id="home"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`relative min-h-[600px] bg-gradient-to-br ${slide.gradient} overflow-hidden`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section
+      id="home"
+      className="relative min-h-[600px] overflow-hidden"
+    >
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={currentSlide}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className={`absolute inset-0 bg-gradient-to-br ${slide.gradient}`}
+        >
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 h-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full">
             <motion.div
-              key={`content-${currentSlide}`}
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
             >
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
@@ -124,11 +125,9 @@ export default function Hero() {
             </motion.div>
 
             <motion.div
-              key={`video-${currentSlide}`}
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
               className="relative"
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black aspect-video">
@@ -166,7 +165,8 @@ export default function Hero() {
             ))}
           </div>
         </div>
-      </motion.section>
-    </AnimatePresence>
+        </motion.div>
+      </AnimatePresence>
+    </section>
   );
 }
