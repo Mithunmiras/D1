@@ -1,65 +1,51 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { Form, Input, Select, Button, message } from "antd";
+import { UserOutlined, MailOutlined, PhoneOutlined, BankOutlined } from "@ant-design/icons";
 import { BaseUrl } from "../config";
 
+const { Option } = Select;
+const { TextArea } = Input;
+
 const ScheduleConsultation = () => {
+  const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (values) => {
     setLoading(true);
-    setToast(null);
-
-    const data = {
-      firstName: e.target.firstName.value,
-      lastName: e.target.lastName.value,
-      email: e.target.email.value,
-      phone: e.target.phone.value,
-      company: e.target.company.value,
-      service: e.target.service.value,
-      message: e.target.message.value,
-    };
 
     try {
       const res = await fetch(`${BaseUrl}/api/schedule`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(values),
       });
-      console.log("res: ", res);
 
       const result = await res.json();
-      console.log("result: ", result);
 
       if (res.ok) {
-        setToast({ type: "success", message: result.message });
-        e.target.reset();
+        message.success(result.message || "Consultation scheduled successfully!");
+        form.resetFields();
       } else {
-        setToast({
-          type: "error",
-          message: result.message || "Failed to schedule",
-        });
+        message.error(result.message || "Failed to schedule consultation");
       }
-    } catch {
-      setToast({ type: "error", message: "Failed to schedule" });
+    } catch (error) {
+      message.error("Failed to schedule consultation. Please try again.");
     } finally {
       setLoading(false);
-      setTimeout(() => setToast(null), 3000);
     }
   };
 
   return (
-    <section id="appointment" className="py-20 bg-gray-50">
+    <section id="appointment" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-gray-800 mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 sm:mb-4"
           >
             Schedule a Consultation
           </motion.h2>
@@ -68,176 +54,137 @@ const ScheduleConsultation = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
+            className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4"
           >
             Ready to transform your business? Book a free consultation with our
             digital experts to discuss your project and goals.
           </motion.p>
         </div>
 
-        {/* Form */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="bg-white rounded-lg shadow-lg p-8"
+          className="bg-white rounded-lg shadow-lg p-6 sm:p-8 lg:p-10"
         >
-          <motion.form
-            className="grid md:grid-cols-2 gap-6"
-            onSubmit={handleSubmit}
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: {},
-              visible: {
-                transition: { staggerChildren: 0.15 },
-              },
-            }}
+          <Form
+            form={form}
+            layout="vertical"
+            onFinish={handleSubmit}
+            autoComplete="off"
+            requiredMark="optional"
+            size="large"
           >
-            {[
-              {
-                id: "firstName",
-                label: "First Name *",
-                type: "text",
-                required: true,
-              },
-              {
-                id: "lastName",
-                label: "Last Name *",
-                type: "text",
-                required: true,
-              },
-              { id: "email", label: "Email *", type: "email", required: true },
-              { id: "phone", label: "Phone Number", type: "tel" },
-              { id: "company", label: "Company Name", type: "text" },
-            ].map((field) => (
-              <motion.div
-                key={field.id}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 },
-                }}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <Form.Item
+                name="firstName"
+                label="First Name"
+                rules={[{ required: true, message: "Please enter your first name" }]}
               >
-                <label
-                  htmlFor={field.id}
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  {field.label}
-                </label>
-                <input
-                  type={field.type}
-                  id={field.id}
-                  name={field.id}
-                  required={field.required}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                <Input
+                  prefix={<UserOutlined className="text-gray-400" />}
+                  placeholder="John"
+                  className="rounded-lg"
                 />
-              </motion.div>
-            ))}
+              </Form.Item>
 
-            {/* Service Dropdown */}
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-            >
-              <label
-                htmlFor="service"
-                className="block text-sm font-medium text-gray-700 mb-2"
+              <Form.Item
+                name="lastName"
+                label="Last Name"
+                rules={[{ required: true, message: "Please enter your last name" }]}
               >
-                Service Interest
-              </label>
-              <select
-                id="service"
+                <Input
+                  prefix={<UserOutlined className="text-gray-400" />}
+                  placeholder="Doe"
+                  className="rounded-lg"
+                />
+              </Form.Item>
+
+              <Form.Item
+                name="email"
+                label="Email"
+                rules={[
+                  { required: true, message: "Please enter your email" },
+                  { type: "email", message: "Please enter a valid email" }
+                ]}
+              >
+                <Input
+                  prefix={<MailOutlined className="text-gray-400" />}
+                  placeholder="john.doe@example.com"
+                  className="rounded-lg"
+                />
+              </Form.Item>
+
+              <Form.Item
+                name="phone"
+                label="Phone Number"
+              >
+                <Input
+                  prefix={<PhoneOutlined className="text-gray-400" />}
+                  placeholder="+1 (555) 000-0000"
+                  className="rounded-lg"
+                />
+              </Form.Item>
+
+              <Form.Item
+                name="company"
+                label="Company Name"
+              >
+                <Input
+                  prefix={<BankOutlined className="text-gray-400" />}
+                  placeholder="Your Company"
+                  className="rounded-lg"
+                />
+              </Form.Item>
+
+              <Form.Item
                 name="service"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                label="Service Interest"
               >
-                <option value="">Select a service</option>
-                <option value="digital-strategy">Digital Strategy</option>
-                <option value="web-development">Website Development</option>
-                <option value="digital-marketing">Digital Marketing</option>
-                <option value="mobile-development">Mobile Development</option>
-                <option value="other">Other</option>
-              </select>
-            </motion.div>
+                <Select
+                  placeholder="Select a service"
+                  className="rounded-lg"
+                  allowClear
+                >
+                  <Option value="digital-strategy">Digital Strategy</Option>
+                  <Option value="web-development">Website Development</Option>
+                  <Option value="digital-marketing">Digital Marketing</Option>
+                  <Option value="mobile-development">Mobile Development</Option>
+                  <Option value="other">Other</Option>
+                </Select>
+              </Form.Item>
+            </div>
 
-            {/* Message Box */}
-            <motion.div
-              className="md:col-span-2"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
+            <Form.Item
+              name="message"
+              label="Project Details"
+              className="mb-6"
             >
-              <label
-                htmlFor="message"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                Project Details
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
+              <TextArea
+                rows={4}
                 placeholder="Tell us about your project requirements and goals..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              ></textarea>
-            </motion.div>
+                className="rounded-lg"
+              />
+            </Form.Item>
 
-            {/* Submit Button */}
-            <motion.div
-              className="md:col-span-2"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-            >
-              <motion.button
-                type="submit"
-                disabled={loading}
-                whileHover={
-                  !loading
-                    ? {
-                        scale: 1.05,
-                        boxShadow: "0px 8px 20px rgba(59,130,246,0.5)",
-                      }
-                    : {}
-                }
-                whileTap={!loading ? { scale: 0.95 } : {}}
-                className={`w-full py-3 px-6 rounded-lg font-semibold transition duration-300
-                  ${
-                    loading
-                      ? "bg-blue-400 cursor-not-allowed"
-                      : "bg-blue-600 hover:bg-blue-700"
-                  }
-                  text-white
-                `}
-              >
-                {loading ? "Scheduling..." : "Schedule Consultation"}
-              </motion.button>
-            </motion.div>
-          </motion.form>
-
-          {/* Toast Message */}
-          <AnimatePresence>
-            {toast && (
+            <Form.Item className="mb-0">
               <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-                className={`mt-6 p-4 rounded ${
-                  toast.type === "success"
-                    ? "bg-green-100 text-green-700"
-                    : "bg-red-100 text-red-700"
-                }`}
-                role="alert"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                {toast.message}
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  loading={loading}
+                  block
+                  className="h-12 text-base font-semibold bg-blue-600 hover:bg-blue-700 rounded-lg"
+                >
+                  {loading ? "Scheduling..." : "Schedule Consultation"}
+                </Button>
               </motion.div>
-            )}
-          </AnimatePresence>
+            </Form.Item>
+          </Form>
         </motion.div>
       </div>
     </section>

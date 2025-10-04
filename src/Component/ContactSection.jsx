@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { Form, Input, Button, message } from "antd";
+import { UserOutlined, MailOutlined, MessageOutlined } from "@ant-design/icons";
 import { BaseUrl } from "../config";
 
+const { TextArea } = Input;
+
 const ContactSection = () => {
+  const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (values) => {
     setLoading(true);
-    setToast(null);
 
     const data = {
-      contactName: e.target.contactName.value,
-      contactEmail: e.target.contactEmail.value,
-      contactSubject: e.target.contactSubject.value,
-      contactMessage: e.target.contactMessage.value,
+      contactName: values.name,
+      contactEmail: values.email,
+      contactSubject: values.subject,
+      contactMessage: values.message,
     };
 
     try {
@@ -29,36 +30,28 @@ const ContactSection = () => {
       const result = await res.json();
 
       if (res.ok) {
-        setToast({
-          type: "success",
-          message: result.message || "Message sent!",
-        });
-        e.target.reset();
+        message.success(result.message || "Message sent successfully!");
+        form.resetFields();
       } else {
-        setToast({
-          type: "error",
-          message: result.message || "Failed to send message",
-        });
+        message.error(result.message || "Failed to send message");
       }
     } catch (err) {
-      setToast({ type: "error", message: "Failed to send message" });
+      message.error("Failed to send message. Please try again.");
     } finally {
       setLoading(false);
-      setTimeout(() => setToast(null), 3000);
     }
   };
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-12 sm:py-16 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-4xl font-bold text-gray-800 mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 sm:mb-4"
           >
             Get In Touch
           </motion.h2>
@@ -67,20 +60,20 @@ const ContactSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
+            className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4"
           >
             Ready to start your digital transformation journey? Contact us today
             to discuss your project requirements.
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Info */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="order-2 lg:order-1"
           >
             <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
 
@@ -103,12 +96,12 @@ const ContactSection = () => {
                   color: "hover:text-green-600",
                 },
                 {
-                  icon: "fas fa-envelope text-purple-600",
-                  bg: "bg-purple-100",
+                  icon: "fas fa-envelope text-blue-600",
+                  bg: "bg-blue-100",
                   title: "Email",
                   link: "mailto:info@digitner.com",
                   text: "info@digitner.com",
-                  color: "hover:text-purple-600",
+                  color: "hover:text-blue-600",
                 },
               ].map((item, idx) => (
                 <motion.div
@@ -126,7 +119,7 @@ const ContactSection = () => {
                     <h4 className="font-semibold">{item.title}</h4>
                     <a
                       href={item.link}
-                      className={`text-gray-600 ${item.color}`}
+                      className={`text-gray-600 ${item.color} transition-colors`}
                     >
                       {item.text}
                     </a>
@@ -135,10 +128,9 @@ const ContactSection = () => {
               ))}
             </div>
 
-            {/* Business Hours */}
             <div className="mt-8">
               <h4 className="font-semibold mb-4">Business Hours</h4>
-              <div className="text-gray-600">
+              <div className="text-gray-600 space-y-1">
                 <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
                 <p>Saturday: 10:00 AM - 4:00 PM</p>
                 <p>Sunday: Closed</p>
@@ -146,131 +138,90 @@ const ContactSection = () => {
             </div>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="order-1 lg:order-2"
           >
-            <div className="bg-gray-50 p-8 rounded-lg">
+            <div className="bg-gray-50 p-6 sm:p-8 rounded-lg shadow-lg">
               <h3 className="text-2xl font-bold mb-6">Send Us a Message</h3>
-              <motion.form
-                className="space-y-6"
-                onSubmit={handleSubmit}
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: {},
-                  visible: { transition: { staggerChildren: 0.15 } },
-                }}
+              <Form
+                form={form}
+                layout="vertical"
+                onFinish={handleSubmit}
+                autoComplete="off"
+                requiredMark="optional"
+                size="large"
               >
-                {[
-                  {
-                    id: "contactName",
-                    label: "Name *",
-                    type: "text",
-                    required: true,
-                  },
-                  {
-                    id: "contactEmail",
-                    label: "Email *",
-                    type: "email",
-                    required: true,
-                  },
-                  { id: "contactSubject", label: "Subject", type: "text" },
-                ].map((field) => (
-                  <motion.div
-                    key={field.id}
-                    variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0 },
-                    }}
-                  >
-                    <label
-                      htmlFor={field.id}
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
-                      {field.label}
-                    </label>
-                    <input
-                      type={field.type}
-                      id={field.id}
-                      name={field.id}
-                      required={field.required}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg 
-                               focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    />
-                  </motion.div>
-                ))}
-
-                {/* Message */}
-                <motion.div
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
+                <Form.Item
+                  name="name"
+                  label="Name"
+                  rules={[{ required: true, message: "Please enter your name" }]}
                 >
-                  <label
-                    htmlFor="contactMessage"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Message *
-                  </label>
-                  <textarea
-                    id="contactMessage"
-                    name="contactMessage"
-                    rows="5"
-                    required
+                  <Input
+                    prefix={<UserOutlined className="text-gray-400" />}
+                    placeholder="Your full name"
+                    className="rounded-lg"
+                  />
+                </Form.Item>
+
+                <Form.Item
+                  name="email"
+                  label="Email"
+                  rules={[
+                    { required: true, message: "Please enter your email" },
+                    { type: "email", message: "Please enter a valid email" }
+                  ]}
+                >
+                  <Input
+                    prefix={<MailOutlined className="text-gray-400" />}
+                    placeholder="your.email@example.com"
+                    className="rounded-lg"
+                  />
+                </Form.Item>
+
+                <Form.Item
+                  name="subject"
+                  label="Subject"
+                >
+                  <Input
+                    prefix={<MessageOutlined className="text-gray-400" />}
+                    placeholder="What is this about?"
+                    className="rounded-lg"
+                  />
+                </Form.Item>
+
+                <Form.Item
+                  name="message"
+                  label="Message"
+                  rules={[{ required: true, message: "Please enter your message" }]}
+                >
+                  <TextArea
+                    rows={5}
                     placeholder="Tell us about your project..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg 
-                               focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  ></textarea>
-                </motion.div>
+                    className="rounded-lg"
+                  />
+                </Form.Item>
 
-                {/* Submit Button */}
-                <motion.button
-                  type="submit"
-                  disabled={loading}
-                  whileHover={
-                    !loading
-                      ? {
-                          scale: 1.05,
-                          boxShadow: "0px 8px 20px rgba(59,130,246,0.5)",
-                        }
-                      : {}
-                  }
-                  whileTap={!loading ? { scale: 0.95 } : {}}
-                  className={`w-full py-3 px-6 rounded-lg font-semibold transition duration-300
-                    ${
-                      loading
-                        ? "bg-blue-400 cursor-not-allowed"
-                        : "bg-blue-600 hover:bg-blue-700 text-white"
-                    }`}
-                >
-                  {loading ? "Sending..." : "Send Message"}
-                </motion.button>
-              </motion.form>
-
-              {/* Toast */}
-              <AnimatePresence>
-                {toast && (
+                <Form.Item className="mb-0">
                   <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.4 }}
-                    className={`mt-4 p-4 rounded ${
-                      toast.type === "success"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
-                    role="alert"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    {toast.message}
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      loading={loading}
+                      block
+                      className="h-12 text-base font-semibold bg-blue-600 hover:bg-blue-700 rounded-lg"
+                    >
+                      {loading ? "Sending..." : "Send Message"}
+                    </Button>
                   </motion.div>
-                )}
-              </AnimatePresence>
+                </Form.Item>
+              </Form>
             </div>
           </motion.div>
         </div>
