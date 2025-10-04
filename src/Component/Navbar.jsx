@@ -57,6 +57,17 @@ const Navbar = () => {
               }
 
               if (isHomePage) {
+                if (id === 'academy') {
+                  return (
+                    <Link
+                      key={id}
+                      to="/academy"
+                      className="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300"
+                    >
+                      {label}
+                    </Link>
+                  );
+                }
                 return (
                   <a
                     key={id}
@@ -126,6 +137,18 @@ const Navbar = () => {
                 }
 
                 if (isHomePage) {
+                  if (id === 'academy') {
+                    return (
+                      <Link
+                        key={id}
+                        to="/academy"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="text-gray-700 hover:text-blue-600 font-medium transition duration-300"
+                      >
+                        {label}
+                      </Link>
+                    );
+                  }
                   return (
                     <a
                       key={id}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AiOutlineStar,
   AiOutlinePhone,
@@ -14,6 +14,7 @@ export default function FloatingBtn() {
   const [isOpen, setIsOpen] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [showReview, setShowReview] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   const handleCloseChat = () => setShowChat(false);
   const handleCloseReview = () => setShowReview(false);
@@ -23,6 +24,21 @@ export default function FloatingBtn() {
     hidden: { opacity: 0, scale: 0.5, y: 20 },
     visible: { opacity: 1, scale: 1, y: 0 },
     exit: { opacity: 0, scale: 0.5, y: 20 },
+  };
+
+  // Show scroll-to-top after scrolling some distance
+  useEffect(() => {
+    const onScroll = () => {
+      const scrolled = window.scrollY || document.documentElement.scrollTop;
+      setShowScrollTop(scrolled > 200);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -121,6 +137,26 @@ export default function FloatingBtn() {
                   />
                 </motion.button>
               </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Scroll To Top Button */}
+          <AnimatePresence>
+            {showScrollTop && (
+              <motion.button
+                key="scroll-top"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleScrollToTop}
+                aria-label="Back to top"
+                className="mb-3 sm:mb-4 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full shadow-lg bg-gray-800 text-white"
+                title="Back to top"
+              >
+                ↑
+              </motion.button>
             )}
           </AnimatePresence>
 
