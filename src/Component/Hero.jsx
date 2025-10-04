@@ -1,65 +1,111 @@
-import React from "react";
-import { FaGraduationCap, FaBook } from "react-icons/fa";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { FaGraduationCap, FaBook, FaRocket, FaPhoneAlt, FaPlay } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+
+const heroSlides = [
+  {
+    id: 1,
+    title: "Empower Your MSME with Digital",
+    highlightedWord: "Transformation",
+    description: "Join over 1 million MSMEs transforming their businesses with our end-to-end digital solutions, automation, and AI-powered tools.",
+    primaryButton: { text: "Start Your Transformation", icon: FaRocket },
+    secondaryButton: { text: "Watch Demo", icon: FaPlay }
+  },
+  {
+    id: 2,
+    title: "Automate Your Growth",
+    highlightedWord: "Marketing",
+    description: "Scale your business with intelligent automation, AI-powered insights, and data-driven marketing strategies.",
+    primaryButton: { text: "Boost Your Growth", icon: FaRocket },
+    secondaryButton: { text: "Strategy Call", icon: FaPhoneAlt }
+  },
+  {
+    id: 3,
+    title: "Learn & Grow with Digitner",
+    highlightedWord: "Academy",
+    description: "Access expert-led courses, live workshops, and a thriving community of entrepreneurs and digital innovators.",
+    primaryButton: { text: "Join Academy", icon: FaGraduationCap },
+    secondaryButton: { text: "Explore Resources", icon: FaBook }
+  }
+];
 
 export default function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const slide = heroSlides[currentSlide];
+  const PrimaryIcon = slide.primaryButton.icon;
+  const SecondaryIcon = slide.secondaryButton.icon;
+
   return (
     <section
       id="home"
-      className="relative min-h-[600px] bg-gradient-to-br from-cyan-400 via-teal-400 to-yellow-400 overflow-hidden"
+      className="relative min-h-[600px] bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
-            >
-              Learn & Grow with{" "}
-              <span className="text-purple-600">Digitner Academy</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg text-white mb-8 leading-relaxed max-w-xl"
-            >
-              Access expert-led courses, live workshops, and a thriving
-              community of entrepreneurs and digital innovators.
-            </motion.p>
-
+          <AnimatePresence mode="wait">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4"
+              key={currentSlide}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 50 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
             >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold shadow-lg hover:bg-purple-700 transition duration-300 flex items-center justify-center gap-2"
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
               >
-                <FaGraduationCap className="text-xl" />
-                Join Academy
-              </motion.button>
+                {slide.title}{" "}
+                <span className="bg-gradient-to-r from-yellow-400 via-pink-400 to-orange-400 bg-clip-text text-transparent">
+                  {slide.highlightedWord}
+                </span>
+              </motion.h1>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-semibold border-2 border-white hover:bg-white hover:text-purple-600 transition duration-300 flex items-center justify-center gap-2"
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-lg text-white/90 mb-8 leading-relaxed max-w-xl"
               >
-                <FaBook className="text-xl" />
-                Explore Resources
-              </motion.button>
+                {slide.description}
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex flex-col sm:flex-row gap-4"
+              >
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold shadow-lg hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2"
+                >
+                  <PrimaryIcon className="text-xl" />
+                  {slide.primaryButton.text}
+                </motion.button>
+
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-semibold border-2 border-white hover:bg-white hover:text-blue-600 transition duration-300 flex items-center justify-center gap-2"
+                >
+                  <SecondaryIcon className="text-xl" />
+                  {slide.secondaryButton.text}
+                </motion.button>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </AnimatePresence>
 
           <motion.div
             initial={{ opacity: 0, x: 50 }}
@@ -81,11 +127,24 @@ export default function Hero() {
                   whileTap={{ scale: 0.9 }}
                   className="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-xl"
                 >
-                  <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-purple-600 border-b-[12px] border-b-transparent ml-1"></div>
+                  <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-blue-600 border-b-[12px] border-b-transparent ml-1"></div>
                 </motion.button>
               </div>
             </div>
           </motion.div>
+        </div>
+
+        <div className="flex justify-center gap-2 mt-8">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                index === currentSlide ? "w-8 bg-white" : "w-2 bg-white/50"
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>
