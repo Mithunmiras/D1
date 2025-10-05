@@ -6,6 +6,10 @@
   * {
     scroll-behavior: smooth;
   }
+
+  body {
+    overflow-x: hidden;
+  }
 }
 
 .container-max {
@@ -40,12 +44,16 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+  animation: fadeIn 0.2s ease-out;
 }
 
-.preloader.fade-out {
-  opacity: 0;
-  visibility: hidden;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .preloader-content {
@@ -53,18 +61,19 @@
 }
 
 .preloader-logo {
-  width: 150px;
+  width: 120px;
   height: auto;
-  animation: pulse 1.5s ease-in-out infinite;
+  animation: smoothPulse 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: transform, opacity;
 }
 
-@keyframes pulse {
+@keyframes smoothPulse {
   0%, 100% {
     opacity: 1;
     transform: scale(1);
   }
   50% {
-    opacity: 0.7;
-    transform: scale(0.95);
+    opacity: 0.8;
+    transform: scale(0.96);
   }
 }

@@ -16,9 +16,10 @@ export default function App() {
 
   useEffect(() => {
     setLoading(true);
+    window.scrollTo(0, 0);
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 800);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [location.pathname]);
