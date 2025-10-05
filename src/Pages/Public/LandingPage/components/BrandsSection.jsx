@@ -8,7 +8,7 @@ const BrandsSection = () => {
     <motion.section
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: false, amount: 0.3 }}
       variants={sectionVariants}
       className="brands-section"
     >

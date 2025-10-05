@@ -52,7 +52,7 @@ const ServicesSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -70,7 +70,7 @@ const ServicesSection = () => {
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -10 }}
               className="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300"

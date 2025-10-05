@@ -43,7 +43,7 @@ const ClientTestimonials = () => {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900"
         >

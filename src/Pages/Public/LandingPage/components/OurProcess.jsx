@@ -31,7 +31,7 @@ const OurProcess = () => {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900"
         >
@@ -43,7 +43,7 @@ const OurProcess = () => {
             <motion.div
               initial={{ width: 0 }}
               whileInView={{ width: "100%" }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 1.5, delay: 0.5 }}
               className="h-full bg-purple-600"
             />
@@ -54,7 +54,7 @@ const OurProcess = () => {
               key={index}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               className="relative"
             >
@@ -62,7 +62,7 @@ const OurProcess = () => {
                 <motion.div
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.3 }}
                   transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
                   className="w-16 h-16 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto"
                 >

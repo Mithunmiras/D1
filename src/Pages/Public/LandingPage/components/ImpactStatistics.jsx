@@ -37,7 +37,7 @@ const ImpactStatistics = () => {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-5xl font-bold text-center mb-16"
         >
@@ -50,7 +50,7 @@ const ImpactStatistics = () => {
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="text-center"
             >

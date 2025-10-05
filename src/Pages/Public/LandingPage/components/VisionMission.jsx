@@ -9,7 +9,7 @@ const VisionMission = () => {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900"
         >
@@ -20,7 +20,7 @@ const VisionMission = () => {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.8 }}
             className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-10 text-white shadow-2xl"
           >
@@ -41,7 +41,7 @@ const VisionMission = () => {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.8 }}
             className="bg-gradient-to-br from-teal-500 to-green-500 rounded-2xl p-10 text-white shadow-2xl"
           >

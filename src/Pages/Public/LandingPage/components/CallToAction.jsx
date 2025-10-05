@@ -7,7 +7,7 @@ const CallToAction = () => {
     <motion.section
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: false, amount: 0.3 }}
       variants={sectionVariants}
       className="cta-section bg-primary-900 text-white py-16"
     >

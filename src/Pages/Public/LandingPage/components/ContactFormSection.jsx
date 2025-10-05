@@ -25,7 +25,7 @@ const ContactFormSection = () => {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
           className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-3 sm:mb-4 text-gray-900"
         >
@@ -35,7 +35,7 @@ const ContactFormSection = () => {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-center text-gray-600 mb-8 sm:mb-12 text-base sm:text-lg px-4"
         >
@@ -45,7 +45,7 @@ const ContactFormSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.8 }}
           className="bg-gray-50 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xl"
         >

@@ -34,7 +34,7 @@ const LatestInsights = () => {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900"
         >
@@ -47,7 +47,7 @@ const LatestInsights = () => {
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow"
             >
