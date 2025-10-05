@@ -4,8 +4,11 @@ export default function Preloader() {
   return (
     <div className="preloader">
       <div className="preloader-content">
-        <div className="spinner"></div>
-        <div className="preloader-text">Loading...</div>
+        <img
+          src="/logo.png"
+          alt="Digitner"
+          className="preloader-logo"
+        />
       </div>
     </div>
   );
