@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { navLinks, titleDesc } from "../config/navigation";
 import { servicesDropdownMenu } from "../config/servicesPageData";
 import { FaChevronDown, FaBars, FaTimes } from "react-icons/fa";
 import logo from "/logo.png";
 
 const Navbar = () => {
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -56,51 +54,30 @@ const Navbar = () => {
                 );
               }
 
-              if (isHomePage) {
-                if (id === 'academy') {
-                  return (
-                    <Link
-                      key={id}
-                      to="/academy"
-                      className="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300"
-                    >
-                      {label}
-                    </Link>
-                  );
-                }
-                return (
-                  <a
-                    key={id}
-                    href={`#${id}`}
-                    className="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300"
-                  >
-                    {label}
-                  </a>
-                );
-              } else {
-                const pageMap = {
-                  about: "/about",
-                  blog: "/blog",
-                  contact: "/contact",
-                  academy: "/academy",
-                };
-                return (
-                  <Link
-                    key={id}
-                    to={pageMap[id] || "/"}
-                    className="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300"
-                  >
-                    {label}
-                  </Link>
-                );
-              }
+              const pageMap = {
+                home: "/",
+                about: "/about",
+                blog: "/blog",
+                contact: "/contact",
+                academy: "/academy",
+              };
+
+              return (
+                <Link
+                  key={id}
+                  to={pageMap[id] || "/"}
+                  className="nav-link text-gray-700 hover:text-blue-600 font-medium transition duration-300"
+                >
+                  {label}
+                </Link>
+              );
             })}
-            <a
-              href={isHomePage ? "#appointment" : "/#appointment"}
+            <Link
+              to="/contact"
               className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg hover:from-purple-700 hover:to-blue-700 transition duration-300 shadow-lg"
             >
               Schedule Appointment
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -136,55 +113,32 @@ const Navbar = () => {
                   );
                 }
 
-                if (isHomePage) {
-                  if (id === 'academy') {
-                    return (
-                      <Link
-                        key={id}
-                        to="/academy"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="text-gray-700 hover:text-blue-600 font-medium transition duration-300"
-                      >
-                        {label}
-                      </Link>
-                    );
-                  }
-                  return (
-                    <a
-                      key={id}
-                      href={`#${id}`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-700 hover:text-blue-600 font-medium transition duration-300"
-                    >
-                      {label}
-                    </a>
-                  );
-                } else {
-                  const pageMap = {
-                    about: "/about",
-                    blog: "/blog",
-                    contact: "/contact",
-                    academy: "/academy",
-                  };
-                  return (
-                    <Link
-                      key={id}
-                      to={pageMap[id] || "/"}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-gray-700 hover:text-blue-600 font-medium transition duration-300"
-                    >
-                      {label}
-                    </Link>
-                  );
-                }
+                const pageMap = {
+                  home: "/",
+                  about: "/about",
+                  blog: "/blog",
+                  contact: "/contact",
+                  academy: "/academy",
+                };
+
+                return (
+                  <Link
+                    key={id}
+                    to={pageMap[id] || "/"}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-gray-700 hover:text-blue-600 font-medium transition duration-300"
+                  >
+                    {label}
+                  </Link>
+                );
               })}
-              <a
-                href={isHomePage ? "#appointment" : "/#appointment"}
+              <Link
+                to="/contact"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-blue-700 transition duration-300 shadow-lg text-center"
               >
                 Schedule Appointment
-              </a>
+              </Link>
             </div>
           </div>
         )}
