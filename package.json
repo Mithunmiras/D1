@@ -2,7 +2,7 @@
   "name": "digitner-landing",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://digitner-pixel.github.io/digitner-fronted",
+  "homepage": "https://mithunmiras.github.io/D1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
