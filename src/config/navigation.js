@@ -7,6 +7,4 @@ export const navLinks = [
   { id: "contact", label: "Contact", type: "main" },
 ];
 
-export const title = "Digital";
-export const title1 = "ner";
 export const titleDesc = "Your Partner for Digital Growth";

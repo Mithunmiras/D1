@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { navLinks, title, title1, titleDesc } from "../config/navigation";
+import { navLinks, titleDesc } from "../config/navigation";
 import { servicesDropdownMenu } from "../config/servicesPageData";
 import { FaChevronDown, FaBars, FaTimes } from "react-icons/fa";
 import logo from "/logo.png";

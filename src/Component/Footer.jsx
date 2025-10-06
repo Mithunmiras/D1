@@ -1,22 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import ChatBot from "./ChatBot";
-import FloatingBtn from "./FloatingBtn";
 import logo from "/mainLogo2.png";
 
 const Footer = () => {
-  const phoneNumber = "+91 7540082155";
-  const whatsappNumber = "7540082155";
-
-  const handleCall = () => {
-    window.location.href = `tel:${phoneNumber}`;
-  };
-
-  const handleWhatsApp = () => {
-    window.open(`https://wa.me/${whatsappNumber}`, "_blank");
-  };
-
-  // Variants for staggered columns
   const containerVariants = {
     hidden: {},
     visible: {
@@ -144,9 +130,6 @@ const Footer = () => {
           </motion.div>
         </motion.div>
 
-        {/* <FloatingBtn /> */}
-
-        {/* Bottom bar */}
         <motion.div
           className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400"
           initial={{ opacity: 0 }}

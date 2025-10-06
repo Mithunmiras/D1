@@ -6,42 +6,39 @@ const { TextArea } = Input;
 
 const ReviewModal = ({ open, onClose }) => {
   const [form] = Form.useForm();
-  const [loading, setLoading] = useState(false); // ✅ loading state
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
     try {
-      setLoading(true); // start loading
+      setLoading(true);
       const values = await form.validateFields();
 
-      // ✅ Send review to backend API
       await fetch(`${BaseUrl}/api/review/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
 
-      message.success("Thanks for your review! 🎉"); // success toast
+      message.success("Thanks for your review!");
       form.resetFields();
-      if (onClose) onClose(); // close modal
+      if (onClose) onClose();
     } catch (error) {
-      console.error("Validation Failed:", error);
       message.error("Failed to submit review. Please try again.");
     } finally {
-      setLoading(false); // stop loading
+      setLoading(false);
     }
   };
 
   return (
     <Modal
       title="Submit Review"
-      open={open} // 👈 controlled by parent
+      open={open}
       onOk={handleSubmit}
       onCancel={onClose}
       okText="Submit"
-      confirmLoading={loading} // ✅ show loading spinner
+      confirmLoading={loading}
     >
       <Form form={form} layout="vertical">
-        {/* Name (Required) */}
         <Form.Item
           name="name"
           label="Your Name"
@@ -50,7 +47,6 @@ const ReviewModal = ({ open, onClose }) => {
           <Input placeholder="John Doe" />
         </Form.Item>
 
-        {/* Email (Optional) */}
         <Form.Item
           name="email"
           label="Email"
@@ -59,7 +55,6 @@ const ReviewModal = ({ open, onClose }) => {
           <Input placeholder="johndoe@example.com" />
         </Form.Item>
 
-        {/* Phone (Optional) */}
         <Form.Item
           name="mobileNo"
           label="Phone Number"
@@ -73,7 +68,6 @@ const ReviewModal = ({ open, onClose }) => {
           <Input placeholder="9876543210" />
         </Form.Item>
 
-        {/* Rating (Required) */}
         <Form.Item
           name="rating"
           label="Rating"
@@ -82,7 +76,6 @@ const ReviewModal = ({ open, onClose }) => {
           <Rate />
         </Form.Item>
 
-        {/* Comment (Required) */}
         <Form.Item
           name="comment"
           label="Comment"
